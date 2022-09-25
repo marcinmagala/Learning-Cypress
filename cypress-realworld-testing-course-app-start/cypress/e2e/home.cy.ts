@@ -16,8 +16,23 @@ describe("home page", () => {
   })
 
   context("Course section", () => {
-    it.only("Course: Testing your first Next.js application", () => {
+    it("Course: Testing your first Next.js application", () => {
       cy.getByData("course-0").find("a").eq(3).click()
+      cy.location("pathname").should("eq", "/testing-your-first-application")
+    })
+
+    it("Course: Testing-foundation", () => {
+      cy.getByData("course-1").find("a").eq(3).click()
+      cy.location("pathname").should("eq", "/testing-foundations")
+    })
+
+    it("Start the course", () => {
+      cy.visit("http://localhost:3000/testing-foundations")
+      cy.getByData("next-lesson-button").click()
+      cy.location("pathname").should(
+        "eq",
+        "/testing-foundations/testing-is-a-mindset"
+      )
     })
   })
 })
